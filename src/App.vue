@@ -13,11 +13,12 @@
       </button>
     </div>
     <div class="movies" v-if="movieStore.activeTab === 1">
-      <h3>All Movies</h3>
-      <Movie
-        v-for="movie of movieStore.movies"
-        :key="movie.id"
-        :movie="movie" />
+      <div>
+        <h3>Watched Movies (count: {{ movieStore.watchedMovies.length }})</h3>
+        <Movie v-for="movie of movieStore.watchedMovies" :key="movie.id" :movie="movie" />
+      </div>
+      <h3>All Movies (count: {{ movieStore.totalCountMovies }})</h3>
+      <Movie v-for="movie of movieStore.movies" :key="movie.id" :movie="movie" />
     </div>
     <div class="search" v-else>Search</div>
   </main>
@@ -37,10 +38,12 @@ const movieStore = useMovieStore();
   align-items: center;
   padding: 20px;
 }
+
 .header-logo {
   max-width: 50px;
   margin-right: 10px;
 }
+
 .btn {
   border: none;
   width: 100px;
@@ -51,9 +54,11 @@ const movieStore = useMovieStore();
   cursor: pointer;
   background: #efefef;
 }
+
 .btn:hover {
   opacity: 0.7;
 }
+
 .btn_green {
   background: #37df5c;
 }
